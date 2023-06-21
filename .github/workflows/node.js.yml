@@ -16,6 +16,7 @@ jobs:
         node-version: [18.x]
 
     steps:
+    - name: Cache dependencies
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
@@ -24,7 +25,7 @@ jobs:
     - name: Install server dependencies
       run: npm ci
     - name: Install client dependencies
-      run: cd client && npm ci
+      run: cd client && npm ci --ignore-scripts
     - name: Build the client
       run: cd client && npm run build
     - name: Server Start
